@@ -9,7 +9,6 @@ import androidx.activity.addCallback
 import com.bumptech.glide.Glide
 import ru.urfu.droidpractice1.databinding.ActivitySecondBinding
 import androidx.core.content.edit
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class SecondActivity : ComponentActivity() {
 
@@ -34,18 +33,10 @@ class SecondActivity : ComponentActivity() {
         isLiked = prefs.getBoolean(KEY_IS_LIKED, false)
         dislikesCount = prefs.getInt(KEY_DISLIKES, 0)
         isDisliked = prefs.getBoolean(KEY_IS_DISLIKED, false)
+        isRead = prefs.getBoolean(KEY_IS_READ, false)
 
         setupUI()
         setupClickListeners()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-
-        outState.putInt("likesCount", likesCount)
-        outState.putBoolean("isLiked", isLiked)
-        outState.putInt("dislikesCount", dislikesCount)
-        outState.putBoolean("isDisliked", isDisliked)
     }
 
     override fun onStart() {
@@ -80,6 +71,7 @@ class SecondActivity : ComponentActivity() {
 
     private fun setupUI() {
         updateRatings()
+        binding.wasRead.isChecked = isRead
 
         Glide.with(binding.article2Pic)
             .asBitmap()
@@ -90,9 +82,7 @@ class SecondActivity : ComponentActivity() {
     private fun setupClickListeners() {
         binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
         onBackPressedDispatcher.addCallback {
-            val intent = Intent().apply {
-                putExtra("isRead", binding.wasRead.isChecked)
-            }
+            val intent = Intent().apply { putExtra(KEY_IS_READ, binding.wasRead.isChecked) }
             setResult(RESULT_OK, intent)
             finish()
         }
@@ -123,8 +113,9 @@ class SecondActivity : ComponentActivity() {
             saveState()
         }
 
-        binding.wasRead.setOnCheckedChangeListener { button, isChecked ->
+        binding.wasRead.setOnCheckedChangeListener { _, isChecked ->
             isRead = isChecked
+            prefs.edit { putBoolean(KEY_IS_READ, isRead) }
         }
     }
 
@@ -153,11 +144,12 @@ class SecondActivity : ComponentActivity() {
     }
 
     private companion object {
-        const val PREFS_NAME = "articles_prefs"
-        const val KEY_LIKES = "article2_likesCount"
-        const val KEY_DISLIKES = "article2_ldislikesCount"
-        const val KEY_IS_LIKED = "article2_lisLiked"
-        const val KEY_IS_DISLIKED = "article2_lisDisliked"
+        const val PREFS_NAME = "articlesPrefs"
+        const val KEY_LIKES = "article2LikesCount"
+        const val KEY_DISLIKES = "article2DislikesCount"
+        const val KEY_IS_LIKED = "article2IsLiked"
+        const val KEY_IS_DISLIKED = "article2IsDisliked"
+        const val KEY_IS_READ = "isRead"
         const val IMAGE_URL = "https://www.pokemon.com/static-assets/content-assets/cms2/img/video-games/video-games/pokemon_pokopia/screenshots/08.png"
     }
 }

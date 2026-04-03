@@ -50,11 +50,12 @@ import ru.urfu.droidpractice1.ui.theme.DroidPractice1Theme
 import androidx.core.content.edit
 
 private const val IMAGE_URL = "https://www.pokemon.com/static-assets/content-assets/cms2/img/video-games/_tiles/pokemon-champions/2026/03/24/pokemon-champions-169.png"
-private const val PREFS_NAME = "articles_prefs"
-private const val KEY_LIKES = "article1_likesCount"
-private const val KEY_DISLIKES = "article1_dislikesCount"
-private const val KEY_IS_LIKED = "article1_isLiked"
-private const val KEY_IS_DISLIKED = "article1_isDisliked"
+private const val PREFS_NAME = "articlesPrefs"
+private const val KEY_LIKES = "article1LikesCount"
+private const val KEY_DISLIKES = "article1dIsLikesCount"
+private const val KEY_IS_LIKED = "article1IsLiked"
+private const val KEY_IS_DISLIKED = "article1IsDisliked"
+private const val KEY_IS_READ = "isRead"
 
 
 @Composable
@@ -68,20 +69,21 @@ fun MainActivityScreen() {
     var likesCount by rememberSaveable {
         mutableIntStateOf(prefs.getInt(KEY_LIKES, 0))
     }
-
     var isDisliked by rememberSaveable {
         mutableStateOf(prefs.getBoolean(KEY_IS_DISLIKED, false))
     }
     var dislikesCount by rememberSaveable {
         mutableIntStateOf(prefs.getInt(KEY_DISLIKES, 0))
     }
-    var isSecondActivityRead = false
+    var isSecondActivityRead by rememberSaveable {
+        mutableStateOf(prefs.getBoolean(KEY_IS_READ, false))
+    }
 
     val launcher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            val isRead = result.data?.getBooleanExtra("isRead", false) ?: false
+            val isRead = result.data?.getBooleanExtra(KEY_IS_READ, false) ?: false
             isSecondActivityRead = isRead
         }
     }
@@ -204,7 +206,7 @@ fun MainActivityScreen() {
                 Button(
                     onClick = {
                         val intent = Intent(context, SecondActivity::class.java)
-                        context.startActivity(intent)
+                        launcher.launch(intent)
                     },
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(30.dp),
