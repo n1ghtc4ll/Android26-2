@@ -1,4 +1,19 @@
 <resources>
     <string name="app_name">DroidPractice1</string>
     <string name="article_title">Статья</string>
+    <string name="article_header1">Онлайн-баттлер Pokémon Champions выйдет 8 апреля на Switch</string>
+    <string name="article_paragraph1_1">Релиз игры на iOS и Android состоится до конца года.</string>
+    <string name="article_paragraph1_2">Nintendo объявила, что онлайн-баттлер Pokémon Champions выйдет на Switch 8 апреля — владельцы Switch 2 получат бесплатное обновление игры с оригинальной консоли.</string>
+    <string name="article_paragraph1_3">В битвах игроки смогут использовать покемонов из разных частей франшизы. С помощью приложения Pokémon Home в Champions можно будет перенести питомцев из Scarlet, Violet, Legends: Z-A и Arceus, а также из Pokémon GO.</string>
+    <string name="article_paragraph1_4">В Champions предусмотрена механика вербовки покемонов. Раз в день игроки смогут выбрать одного из десяти питомцев, которые будут генерироваться случайным образом. Однако использовать в сражениях таких покемонов можно будет лишь в течение недели.</string>
+
+    <string name="article_header2">Акции Nintendo выросли на 19% за неделю на фоне выхода Pokémon Pokopia — это самый большой недельный рост с 2016 года</string>
+    <string name="article_paragraph2_1">Игра вышла в начале марта 2026 года. </string>
+    <string name="article_paragraph2_2">5 марта 2026 года Nintendo выпустила симулятор жизни Pokémon Pokopia — эксклюзивно на Switch 2. За четыре дня после релиза её продажи превысили 2,2 миллиона копий.</string>
+    <string name="article_paragraph2_3">Акции Nintendo растут четыре торговые сессии подряд, отметили в Bloomberg. С начала недели капитализация увеличилась на 14 миллиардов — это самое резкое недельное повышение с июля 2016 года, пишет агентство.</string>
+    <string name="article_paragraph2_4">«Сильный дебют» помог частично компенсировать падение акций Nintendo из-за дефицита памяти, указывает издание. И отмечает: рост бумаг особено примечателен на фоне общего спада на мировых рынках из-за рисков, связанных с конфликтом на Ближнем Востоке.</string>
+    <string name="return_to_article1_text">Вернуться к предыдущей статье\n%1$s</string>
+    <string name="likes_count">%d</string>
+    <string name="dislikes_count">%d</string>
+    <string name="is_read">Прочитано</string>
 </resources>
